@@ -30,6 +30,8 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 //create variables to store a reference to svg and g elements
 
 var svg = d3.select(map.getPanes().overlayPane).append("svg");
+var svg_overlay = d3.select(map.getPanes().overlayPane).append("svg");
+var g_overlay = svg_overlay.append("g").attr("class", "leaflet-zoom-hide");
 var g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
 function projectPoint(lat, lng) {
@@ -53,6 +55,11 @@ function updateData(){
 	var lng2 = mapBounds["_northEast"]["lng"];
 
 	request = "/getData?lat1=" + lat1 + "&lat2=" + lat2 + "&lng1=" + lng1 + "&lng2=" + lng2
+	var cell_size = 25;
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+
+    request = "/getData?lat1=" + lat1 + "&lat2=" + lat2 + "&lng1=" + lng1 + "&lng2=" + lng2 + "&w=" + w + "&h=" + h + "&cell_size=" + cell_size
 
 	console.log(request);
 
